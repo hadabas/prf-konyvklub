@@ -1,1 +1,18 @@
-<p>Ez egy tesztszöveg. Először a háttérszín és betűszín kombinációt nézzük meg.</p>
+<h1>Üdvözöljük a Virtuális Könyvklub Platform-on! Az oldal használatához be kell jelentkeznie.</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h2>Bejelentkezés</h2>
+  
+    <label for="username">Felhasználónév</label>
+    <input type="text" id="username" formControlName="username" placeholder="Add meg a neved">
+    <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error">
+      A felhasználónév kötelező!
+    </div>
+
+    <label for="password">Jelszó</label>
+    <input type="password" id="password" formControlName="password" placeholder="••••••••">
+    <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error">
+      A jelszó kötelező!
+    </div>
+  
+    <button type="submit" [disabled]="loginForm.invalid">Belépés</button>
+</form>
