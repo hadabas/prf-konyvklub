@@ -24,12 +24,20 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  login(): void {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       console.log('Bejelentkezési adatok:', username, password);
       // AuthService login meghívása itt
-      this.authService.login(username,password);
+      this.authService.login(username,password).subscribe({
+        next: (data) => {
+          //TODO navigáció másik oldalra
+          console.log("Az adat:"+ data);
+        }, error: (err) => {
+          console.log("ERROR ÁG")
+        }
+      });
+
     }
   }
 

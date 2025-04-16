@@ -10,7 +10,15 @@ export class AuthService {
 
   // login
   login(username: string, password: string){
-    //TODO
+    const body = new URLSearchParams()
+    body.set('username', username);
+    body.set('password',password);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    return this.http.post('http://localhost:5000/app/login', body, {headers: headers});
   }
 
   register() {}
