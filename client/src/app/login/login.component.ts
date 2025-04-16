@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService ) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -39,6 +40,10 @@ export class LoginComponent implements OnInit {
       });
 
     }
+  }
+
+  jumpToRegister() {
+    this.router.navigate(['/register']);
   }
 
 }

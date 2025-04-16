@@ -21,7 +21,19 @@ export class AuthService {
     return this.http.post('http://localhost:5000/app/login', body, {headers: headers});
   }
 
-  register() {}
+  register(user: User) {
+    // HTTP POST request
+    const body = new URLSearchParams();
+    body.set('name', user.username);
+    body.set('email', user.email);
+    body.set('password', user.password);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    return this.http.post('http://localhost:5000/app/register', body, {headers: headers});
+  }
 
   
   logout() {}

@@ -1,0 +1,17 @@
+<h1>A regisztrációhoz kérjük, töltse ki az alábbi mezőket az adataival.</h1>
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="register-form">
+    <h2>Regisztráció</h2>
+  
+    <label for="username">Felhasználónév</label>
+    <input type="text" id="username" formControlName="username" placeholder="Add meg a neved">
+    <label for="email">E-mail cím (opcionális)</label>
+    <input type="text" id="email" formControlName="email" placeholder="Add meg az e-mail címedet">
+    <label for="password">Jelszó</label>
+    <input type="password" id="password" formControlName="password" placeholder="••••••••">
+    <label for="password">Jelszó újra</label>
+    <input type="password" id="password-repeat" formControlName="confirmPassword" placeholder="••••••••">
+  
+
+    <button type="submit" [disabled]="registerForm.invalid">Regisztráció</button>
+    <button id="backButton" type="button" (click)="goBack()">Vissza</button>
+</form>
