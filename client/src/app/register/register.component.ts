@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router'
+import { MatDialog } from '@angular/material/dialog';
+import { RegSuccessDialogComponent } from '../modal_windows/sikeres-regisztracio/reg-success';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +20,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -55,6 +58,15 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.registerForm.value).subscribe({
         next: (data) => {
           console.log(data);
+            this.dialog.open(RegSuccessDialogComponent, {
+              width: '600px',
+              maxWidth: '95vw',
+              data: {
+                  title: 'Sikeres regisztráció!',
+                  message: 'Kérlek, jelentkezz be.'
+              }
+            });
+          this.router.navigate(['/login']);
         }, error: (err) => {
           console.log(err);
         }

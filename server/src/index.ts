@@ -29,7 +29,8 @@ const corsOptions = {
         } else {
             callback(new Error('A CORS által a kérés megtagadva. (Nincs rajta az origin a fehérlistán.)'))
         }
-    }
+    },
+    credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -46,7 +47,12 @@ app.use(cookieParser());
 const sessionOptions: expressSession.SessionOptions = {
     secret: '{Valami$ecretKÓd14324A}*',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        secure: false, // fejlesztéshez false
+        httpOnly: true,
+        sameSite: 'lax'
+      }
 };
 app.use(expressSession(sessionOptions));
 

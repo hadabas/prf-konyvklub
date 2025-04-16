@@ -6,7 +6,7 @@ const SALT_FACTOR = 10;
 interface IUser extends Document {
     username: string,
     password: string;
-    email: string;
+    email?: string;
     role: string;
     comparePassword: (candidatePassword: string, callback: (error: Error | null, isMatch: boolean) => void) => void;
 }

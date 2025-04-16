@@ -1,0 +1,42 @@
+.dialog-container {
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+
+    mat-icon {
+      font-size: 60px;
+      width: 60px;
+      height: 60px;
+      color: #09d13b;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+      flex: 1;
+    }
+  }
+
+  mat-dialog-content {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    word-break: break-word;
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      min-width: 80px;
+    }
+  }
+}

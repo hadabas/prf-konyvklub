@@ -23,7 +23,7 @@ export const configurePassport = (passport: PassportStatic): PassportStatic => {
                         done('Nem létező felhasználónév / jelszó kombináció.');
                     } else {
                         if(isMatch) {
-                            done(null, user.username);
+                            done(null, user);
                         } else {
                             done('Helytelen jelszó.');
                         }

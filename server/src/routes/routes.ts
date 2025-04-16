@@ -16,7 +16,7 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
                 res.status(500).send(error);
             } else {
                 if (!user) {
-                    res.status(400).send('Nem ilyen felhasználónév/jelszó kombinációval felhasználó.');
+                    res.status(400).send('Nincs ilyen felhasználónév/jelszó kombinációval felhasználó.');
                 } else {
                     req.login(user, (err: string | null) => {
                         if (err) {
@@ -60,6 +60,20 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
             res.status(500).send('User is not logged in.');
         }
     });
+
+
+    router.get('/checkAuth', (req: Request, res: Response) => {
+
+        console.log('SESSION:', req.session);
+        console.log('USER:', req.user);
+
+        if (req.isAuthenticated()) {
+            res.status(200).json({ authenticated: true, user: req.user });            
+        } else {
+            res.status(401).json({ authenticated: false });
+        }
+    });
+
 
     return router;
 }

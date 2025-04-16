@@ -18,7 +18,7 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded'
     });
 
-    return this.http.post('http://localhost:5000/app/login', body, {headers: headers});
+    return this.http.post('http://localhost:5000/app/login', body, {headers: headers, withCredentials: true});
   }
 
   register(user: User) {
@@ -39,8 +39,12 @@ export class AuthService {
   }
 
   
-  logout() {}
+  logout() {
+    return this.http.post('http://localhost:5000/app/logout', {}, {withCredentials: true, responseType: 'text'});
+  }
 
-  checkAuth() {}
+  checkAuth() {
+    return this.http.get<boolean>('http://localhost:5000/app/checkAuth', {withCredentials: true});
+  }
 
 }
