@@ -31,18 +31,21 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
         })(req, res, next);
     });
 
-    /*
+    
     router.post('/register', (req: Request, res: Response) => {
+        const username = req.body.username;
+        console.log('A KAPOTT USERNAME A REQUESTBŐL: ',req.body.username)
         const email = req.body.email;
         const password = req.body.password;
-        const user = new User({email: email, password: password});
+        const role = 'felhasznalo'
+        const user = new User({username: username, password: password, email: email, role: role});
         user.save().then(data => {
             res.status(200).send(data);
         }).catch(error => {
             res.status(500).send(error);
         })
     });
-    */
+    
 
     router.post('/logout', (req: Request, res: Response) => {
         if (req.isAuthenticated()) {

@@ -24,6 +24,7 @@ export class AuthService {
   register(user: User) {
     // HTTP POST request
     const body = new URLSearchParams();
+
     body.set('name', user.username);
     body.set('email', user.email);
     body.set('password', user.password);
@@ -31,6 +32,8 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     });
+
+    console.log("A BODY TARTALMA:",body)
 
     return this.http.post('http://localhost:5000/app/register', body, {headers: headers});
   }

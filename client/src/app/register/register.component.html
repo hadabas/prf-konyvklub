@@ -3,13 +3,21 @@
     <h2>Regisztráció</h2>
   
     <label for="username">Felhasználónév</label>
-    <input type="text" id="username" formControlName="username" placeholder="Add meg a neved">
+    <input type="text" id="username" formControlName="username" placeholder="Add meg a neved" required>
     <label for="email">E-mail cím (opcionális)</label>
     <input type="text" id="email" formControlName="email" placeholder="Add meg az e-mail címedet">
     <label for="password">Jelszó</label>
-    <input type="password" id="password" formControlName="password" placeholder="••••••••">
+    <input type="password" id="password" formControlName="password" placeholder="••••••••" required>
+    <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+            <p *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.errors!['required']">A jelszó megadása kötelező.</p>
+            <p *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.errors!['minlength']">A jelszónak minimum 8 karakter hosszúnak kell, hogy legyen.</p>
+        </div>
     <label for="password">Jelszó újra</label>
-    <input type="password" id="password-repeat" formControlName="confirmPassword" placeholder="••••••••">
+    <input type="password" id="password-repeat" formControlName="confirmPassword" placeholder="••••••••" required >
+    <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)">
+        <p *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.errors!['required']">A jelszó megerősítése kötelező.</p>
+        <p *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.errors!['mustMatch']">A jelszavaknak meg kell, hogy egyezzenek.</p>
+    </div>
   
 
     <button type="submit" [disabled]="registerForm.invalid">Regisztráció</button>
