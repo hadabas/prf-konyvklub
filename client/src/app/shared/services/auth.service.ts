@@ -25,7 +25,7 @@ export class AuthService {
     // HTTP POST request
     const body = new URLSearchParams();
 
-    body.set('name', user.username);
+    body.set('username', user.username);
     body.set('email', user.email);
     body.set('password', user.password);
 

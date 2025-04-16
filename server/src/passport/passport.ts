@@ -18,11 +18,16 @@ export const configurePassport = (passport: PassportStatic): PassportStatic => {
         const query = User.findOne({ username: username });
         query.then(user => {
             if (user) {
-                user.comparePassword(password, (error, _) => {
+                user.comparePassword(password, (error, isMatch) => {
                     if (error) {
                         done('Incorrect username or password.');
                     } else {
-                        done(null, user.username);
+                        if(isMatch) {
+                            done(null, user.username);
+                        } else {
+                            console.log("Nem jó a két jelszó, a compare password hibát dob.")
+                            done(null,undefined);
+                        }
                     }
                 });
             } else {

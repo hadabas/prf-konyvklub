@@ -10,7 +10,7 @@ import { configureRoutes } from './routes/routes';
 const app = express();
 const port = 5000;
 
-const dbUrl = 'mongodb+srv://hadabas:1Q2W3E4R@prf-konyvklub.jpq9rwd.mongodb.net/?retryWrites=true&w=majority&appName=prf-konyvklub';
+const dbUrl = 'mongodb+srv://hadabas:1Q2W3E4R@prf-konyvklub.jpq9rwd.mongodb.net/prf-konyvklub?retryWrites=true&w=majority&appName=prf-konyvklub';
 
 // mongodb connection
 mongoose.connect(dbUrl).then((_) => {

@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
           //TODO navigáció másik oldalra
           console.log("Az adat:"+ data);
         }, error: (err) => {
-          console.log("ERROR ÁG")
+          console.log("ERROR ÁG");
+          console.log(err);
         }
       });
 

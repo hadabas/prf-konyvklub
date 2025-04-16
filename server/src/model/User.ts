@@ -43,8 +43,9 @@ UserSchema.methods.comparePassword = function(candidatePassword: string, callbac
         if (error) {
             callback(error, false);
         }
+        console.log("A komparalas belso eredmenye: ", isMatch);
         callback(null, isMatch);
     });
 }
 
-export const User: Model<IUser> = mongoose.model<IUser>('Users', UserSchema);
+export const User: Model<IUser> = mongoose.model<IUser>('User', UserSchema, 'Users'); //Az első a név, második a séma, harmadik a kollekciónak a neve, ahová mentődik.
