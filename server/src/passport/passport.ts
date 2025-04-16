@@ -20,13 +20,12 @@ export const configurePassport = (passport: PassportStatic): PassportStatic => {
             if (user) {
                 user.comparePassword(password, (error, isMatch) => {
                     if (error) {
-                        done('Incorrect username or password.');
+                        done('Nem létező felhasználónév / jelszó kombináció.');
                     } else {
                         if(isMatch) {
                             done(null, user.username);
                         } else {
-                            console.log("Nem jó a két jelszó, a compare password hibát dob.")
-                            done(null,undefined);
+                            done('Helytelen jelszó.');
                         }
                     }
                 });

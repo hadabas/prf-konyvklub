@@ -16,7 +16,7 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
                 res.status(500).send(error);
             } else {
                 if (!user) {
-                    res.status(400).send('Nem létezik ilyen névvel felhasználó.');
+                    res.status(400).send('Nem ilyen felhasználónév/jelszó kombinációval felhasználó.');
                 } else {
                     req.login(user, (err: string | null) => {
                         if (err) {
