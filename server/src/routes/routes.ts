@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { PassportStatic } from 'passport';
 import { User } from '../model/User';
+import { Book } from '../model/Book';
 
 
 export const configureRoutes = (passport: PassportStatic, router: Router): Router => {
@@ -82,6 +83,26 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     router.get('/getUser', (req: Request, res: Response) => {
         if(req.isAuthenticated()) {
             res.status(200).send(req.user);
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+
+    router.post('/registerBook', (req: Request, res: Response) => {
+        console.log('A KAPOTT BODY A REQUESTBŐL: ',req.body)
+        if(req.body) {
+            const cim = req.body.cim;
+            const ev = req.body.ev;
+            const mufaj = req.body.mufaj;
+            const szerzo = req.body.szerzo;
+            const book = new Book({cim: cim, ev: ev, mufaj: mufaj, szerzo: szerzo});
+
+            book.save().then(data => {
+                res.status(200).send(data);
+            }).catch(error => {
+                res.status(500).send(error);
+            })
         } else {
             res.status(401).send(null);
         }

@@ -1,1 +1,18 @@
-<p>addbook works!</p>
+<h1>Könyv felvétele</h1>
+<form [formGroup]="addBookForm" (ngSubmit)="addBook()" class="addbook-form">
+    <h2>Kéjük, töltse ki az alábbi mezőket. <br> Minden mező kitöltése kötelező.</h2>
+  
+    <label for="konyvcim">Könyv címe</label>
+    <input type="text" id="konyvcim" formControlName="cim" placeholder="Add meg a könyv címét">
+
+    <label for="ev">Kiadási év</label>
+    <input type="number" id="ev" formControlName="ev" placeholder="Add meg a könyv kiadásának évét">
+
+    <label for="mufaj">Műfaj</label>
+    <input type="text" id="mufaj" formControlName="mufaj" placeholder="Add meg a könyv műfaját">
+
+    <label for="szerzo">Szerző</label>
+    <input type="text" id="szerzo" formControlName="szerzo" placeholder="Add meg a könyv szerzőjét">
+
+    <button type="submit" [disabled]="addBookForm.invalid">Könyvfelvétel</button>
+</form>
