@@ -39,8 +39,9 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           console.log("Szöveges válasz: " + data); // Itt szöveges adatot kapsz
           this.router.navigate(['/dashboard']);
-
-
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
         },
         error: (err) => {
           console.log("ERROR ÁG");

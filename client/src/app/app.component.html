@@ -1,1 +1,11 @@
+<nav class="navbar">
+    <ul class="navbar__links" *ngIf="isLoggedIn">
+      <li *ngIf="isLoggedIn"><a routerLink="/" >Kezdőlap</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/rolunk">Rólunk</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/szolgaltatasok">Szolgáltatások</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/kapcsolat">Kapcsolat</a></li>
+      <li *ngIf="isLoggedIn" (click)="logoutOnClick()"><a routerLink="/kijelentkezes">Kijelentkezés</a></li>
+    </ul>
+</nav>
+
 <router-outlet />
