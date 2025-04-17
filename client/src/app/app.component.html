@@ -3,14 +3,15 @@
       <!-- Itt a currentUser && currentUser.role-nál az első currentUser feltétel azért kell, mert az csak akkor nem null,
       ha az inicializálás megtörtént, és a DB-ből való lekérdezés lefutott, és van eredménye, ezért a 2. feltétel biztos, hogy létezik. -->
       <div class="adminPanel" *ngIf="currentUser && currentUser.role == 'admin'">
-        <li><a>Könyv felvétele</a></li>
-        <li><a>Könyvklub létrehozása</a></li>
-        <li><a>Hónap könyve</a></li>
-        <li><a>Klubtagok hozzáadása</a></li>
+        <li><a routerLink="/addbook">Könyv felvétele</a></li>
+        <li><a routerLink="/addclub">Könyvklub létrehozása</a></li>
+        <li><a routerLink="/honapkonyve">Hónap könyve</a></li>
+        <li><a routerLink="/manageclubs">Klubtagok hozzáadása</a></li>
       </div>
       <li><a routerLink="/dashboard" >Kezdőlap</a></li>
       <li><a routerLink="/klubcsatlakozas">Könyvklub csatlakozás</a></li>
       <li><a routerLink="/konyvertekeles">Könyvértékelés</a></li>
+      <li><a routerLink="/rangsor">Rangsor</a></li>
       <li (click)="logoutOnClick()"><a routerLink="/kijelentkezes">Kijelentkezés</a></li>
     </ul>
 </nav>
