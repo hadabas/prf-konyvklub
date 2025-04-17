@@ -75,5 +75,18 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     });
 
 
+    /****
+    ***** Innestől kezdődnek az adatbázis specifikus lekérdezések és válaszolások.
+    *****/
+
+    router.get('/getUser', (req: Request, res: Response) => {
+        if(req.isAuthenticated()) {
+            res.status(200).send(req.user);
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+
     return router;
 }

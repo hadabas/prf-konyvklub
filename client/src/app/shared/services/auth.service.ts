@@ -47,4 +47,5 @@ export class AuthService {
     return this.http.get<boolean>('http://localhost:5000/app/checkAuth', {withCredentials: true});
   }
 
+
 }
