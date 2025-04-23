@@ -1,0 +1,72 @@
+.addclub-form {
+  position: relative;
+  margin: 3rem auto;
+  padding: 2rem;
+  width: 60vw;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-sizing: border-box;
+}
+
+.addclub-form h1,
+.addclub-form h2 {
+  text-align: center;
+  color: #333;
+  margin: 0;
+}
+
+.addclub-form label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+  color: #444;
+}
+
+.addclub-form input[type="text"],
+.addclub-form input[type="file"],
+.addclub-form textarea,
+.addclub-form select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+  }
+}
+
+.addclub-form textarea {
+  resize: vertical;
+}
+
+.addclub-form button[type="submit"] {
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover:not(:disabled) {
+    background-color: #357ab7;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}

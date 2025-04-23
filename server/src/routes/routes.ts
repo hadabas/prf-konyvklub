@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { PassportStatic } from 'passport';
 import { User } from '../model/User';
 import { Book } from '../model/Book';
+import { Club } from '../model/Club';
 
 
 export const configureRoutes = (passport: PassportStatic, router: Router): Router => {
@@ -88,6 +89,21 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
         }
     });
 
+    router.get('/getBookTitles', (req: Request, res: Response) => {
+        if(req.isAuthenticated()) {
+            //res.status(200).send(req.user);
+            let cimLista: string[] = []
+
+            Book.find({}, 'cim').exec().then(data => {
+                data.map(book => cimLista.push(book.cim));
+                res.status(200).send(cimLista);
+            });
+
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
 
     router.post('/registerBook', (req: Request, res: Response) => {
         console.log('A KAPOTT BODY A REQUESTBŐL: ',req.body)
@@ -99,6 +115,29 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
             const book = new Book({cim: cim, ev: ev, mufaj: mufaj, szerzo: szerzo});
 
             book.save().then(data => {
+                res.status(200).send(data);
+            }).catch(error => {
+                res.status(500).send(error);
+            })
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+
+
+    router.post('/registerClub', (req: Request, res: Response) => {
+        console.log('A KAPOTT BODY A REQUESTBŐL: ',req.body)
+        if(req.body) {
+            const klubnev = req.body.klubnev;
+            const picture_path = req.body.kep_path; //!!
+            const description = req.body.description;
+            const recommended_books = JSON.parse(req.body.kivalasztottKonyvek);
+            const club = new Club({klubnev: klubnev, picture_path: picture_path, description: description, recommended_books: recommended_books });
+            console.log(club);
+
+            club.save().then(data => {
+                console.log(data)
                 res.status(200).send(data);
             }).catch(error => {
                 res.status(500).send(error);

@@ -1,1 +1,25 @@
-<p>addclub works!</p>
+<h1>Klub felvétele</h1>
+<form [formGroup]="addClubForm" (ngSubmit)="addClub()" class="addclub-form">
+    <h2>Kéjük, töltse ki az alábbi mezőket. <br> Minden mező kitöltése kötelező.</h2>
+  
+    <label for="klubnev">Könyvklub neve</label>
+    <input type="text" id="klubnev" formControlName="klubnev" placeholder="Add meg a klub nevét">
+
+    <label for="kep_path">Válasszon képet</label>
+    <input type="file" id="kep_path" formControlName="kep_path" placeholder="Válasszon egy klubot reprezentáló képet. (png/jpeg)" accept="image/png, image/jpeg">
+
+    <label for="description">Klub leírása</label>
+    <textarea id="description" formControlName="description" rows="6" cols="50"
+          placeholder="Add meg a klubleírást..."></textarea>
+
+    <label for="konyvek">Ajánlott könyvek:</label>
+    <select id="konyvek" formControlName="kivalasztottKonyvek" multiple>
+        <option *ngFor="let konyvcim of konyvcimek">
+            {{ konyvcim }}
+        </option>
+    </select>
+
+    
+
+    <button type="submit" [disabled]="addClubForm.invalid">Klub regisztrálása</button>
+</form>

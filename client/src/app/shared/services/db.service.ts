@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/User';
 import { Book } from '../model/Book';
+import { Club } from '../model/Club';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,13 @@ export class DbService {
   getUser() {
     return this.http.get<User>('http://localhost:5000/app/getUser', {withCredentials: true});
   }
+
+  getBookTitles() {
+    return this.http.get<string[]>('http://localhost:5000/app/getBookTitles', {withCredentials: true});
+  }
+
+
+
 
   registerBook(book: Book) {
     // HTTP POST request
@@ -34,6 +42,27 @@ export class DbService {
 
     return this.http.post<Book>('http://localhost:5000/app/registerBook', body, {headers: headers});
   }
+
+ 
+  registerClub(formData: any) {
+      const body = new URLSearchParams();
+
+      body.set('klubnev', formData.klubnev);
+      body.set('kep_path', formData.kep_path);
+      body.set('description', formData.description);
+      body.set('kivalasztottKonyvek', JSON.stringify(formData.kivalasztottKonyvek));
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      });
+
+      console.log("A BODY TARTALMA:", body);
+
+      return this.http.post<any>('http://localhost:5000/app/registerClub', body, {headers: headers});
+
+  }
+
+
 
   
 
