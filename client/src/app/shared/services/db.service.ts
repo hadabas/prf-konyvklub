@@ -62,6 +62,20 @@ export class DbService {
 
   }
 
+  addHonapKonyve(formData: any) {
+    const body = new URLSearchParams();
+
+    body.set('ev',formData.ev);
+    body.set('honap',formData.honap);
+    body.set('honap_konyve',formData.honap_konyve);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    return this.http.post<any>('http://localhost:5000/app/registerHonapKonyve', body, {headers: headers});
+  }
+
 
 
   

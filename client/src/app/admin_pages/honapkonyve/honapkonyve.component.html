@@ -1,1 +1,23 @@
-<p>honapkonyve works!</p>
+<h1>Hónap könyve választás</h1>
+<p>Az alábbi oldalon lehet a hónap könyvét kiválasztani. Az év és a hónap automatikusan kiválasztódik a jelenlegi időpont alapján, azokon módosítani nem lehet.
+    Amikor egy admin kiválasztja a hónap könyvét, és rákattint a kiválaszt-ra, akkor a jelenlegi hónapban folyó szavazás automatikusan lezárul,
+    és az első három helyezett az eddigi szavazatok alapján kiválasztódik a rangsorban.
+</p>
+<form [formGroup]="honapKonyveForm" (ngSubmit)="createHonapKonyve()" class="honapkonyve-form">
+    <h2>Kéjük, válassza ki a hónap könyvét.</h2>
+  
+    <label for="ev">Jelenlegi év</label>
+    <input type="number" id="ev" formControlName="ev" placeholder="-" readonly>
+
+    <label for="honap">Jelenlegi hónap</label>
+    <input type="number" id="honap" formControlName="honap" placeholder="-" readonly>
+
+    <label for="honap_konyve">A hónap könyve:</label>
+    <select id="honap_konyve" formControlName="honap_konyve">
+        <option *ngFor="let konyvcim of konyvcimek">
+            {{ konyvcim }}
+        </option>
+    </select>
+
+    <button type="submit" [disabled]="honapKonyveForm.invalid">Kiválaszt</button>
+</form>

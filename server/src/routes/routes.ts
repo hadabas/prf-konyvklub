@@ -3,6 +3,7 @@ import { PassportStatic } from 'passport';
 import { User } from '../model/User';
 import { Book } from '../model/Book';
 import { Club } from '../model/Club';
+import { Rangsor } from '../model/Rangsor';
 
 
 export const configureRoutes = (passport: PassportStatic, router: Router): Router => {
@@ -142,6 +143,35 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
             }).catch(error => {
                 res.status(500).send(error);
             })
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+
+    //Ez az ami a rangsorhoz kapcsolódik
+    router.post('/registerHonapKonyve', (req: Request, res: Response) => {
+        console.log('A KAPOTT BODY A REQUESTBŐL: ',req.body)
+        if(req.body) {
+            const ev = req.body.ev;
+            const honap = req.body.honap;
+            const honap_konyve = req.body.honap_konyve;
+            //TODO Az első, második, és harmadik helyezettek értékelés alapú kiszámítását itt kell majd elvégezni ha mindennel megvagyok.
+            const Rangsor_entry = new Rangsor({ev: ev, honap: honap, honap_konyve: honap_konyve, elsohelyezett: '', masodikhelyezett: '', harmadikhelyezett: ''});
+            console.log(Rangsor_entry);
+
+            Rangsor.findOne({ ev: ev, honap: honap }).then(result => {
+                if (result) {
+                    res.status(500).send("Már meg lett választva a hónap könyve erre a hónapra.");
+                    } else {
+                        Rangsor_entry.save().then(data => {
+                            console.log(data)
+                            res.status(200).send(data);
+                        }).catch(error => {
+                            res.status(500).send(error);
+                        })
+                    }
+            });
         } else {
             res.status(401).send(null);
         }
