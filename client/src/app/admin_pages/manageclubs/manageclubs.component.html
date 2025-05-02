@@ -1,1 +1,62 @@
-<p>manageclubs works!</p>
+<h1>Klubok menedzselése</h1>
+<p>Az alábbi oldalon tud az admin jogú felhasználó hozzárendelni illetve törölni klubtagokat a klubokból.</p>
+
+<h2>Klubtag felvétele</h2>
+<form [formGroup]="addClubMemberForm" (ngSubmit)="addClubMember()" class="addclubmember-form">
+    <div class="managePanel addPanel">
+        <table>
+            <tr>
+                <th>Kit vegyek fel?</th>
+                <th>Melyik klubba?</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <select id="felhasznalonev_select" formControlName="felhasznalonev">
+                        <option *ngFor="let felhnev of felhasznalonevek">
+                            {{ felhnev }}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select id="klubnev_select" formControlName="klubnev">
+                        <option *ngFor="let klubnev of klubnevek">
+                            {{ klubnev }}
+                        </option>
+                    </select>
+                </td>
+                <td><button type="submit" [disabled]="addClubMemberForm.invalid">Felvétel</button></td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<h2>Klubtag törlése</h2>
+<form [formGroup]="deleteClubMemberForm" (ngSubmit)="deleteClubMember()" class="deleteclubmember-form">
+    <div class="managePanel deletePanel">
+        <table>
+            <tr>
+                <th>Melyik klubból?</th>
+                <th>Kit töröljek ki?</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <select id="klubnev_select" formControlName="klubnev">
+                        <option *ngFor="let klubnev of klubnevek">
+                            {{ klubnev }}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select id="felhasznalonev_select" formControlName="felhasznalonev">
+                        <option *ngFor="let felhnev of felhasznalonevek">
+                            {{ felhnev }}
+                        </option>
+                    </select>
+                </td>
+                <td><button type="submit" [disabled]="deleteClubMemberForm.invalid">Törlés</button></td>
+            </tr>
+        </table>
+    </div>
+</form>

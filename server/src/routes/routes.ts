@@ -178,5 +178,80 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     });
 
 
+    //Manageclubs innen kezdődik
+    router.get('/mc_getUsers', (req: Request, res: Response) => {
+        if(req.isAuthenticated()) {
+            //res.status(200).send(req.user);
+            let userLista: string[] = [];
+
+            User.find({}, 'username').exec().then(data => {
+                data.map(user => userLista.push(user.username));
+                res.status(200).send(userLista);
+            });
+
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+    router.get('/mc_getClubNames', (req: Request, res: Response) => {
+        if(req.isAuthenticated()) {
+            //res.status(200).send(req.user);
+            let clubNameLista: string[] = [];
+
+            Club.find({}, 'klubnev').exec().then(data => {
+                data.map(klub => clubNameLista.push(klub.klubnev));
+                res.status(200).send(clubNameLista);
+            });
+
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+    router.post('/mc_addClubMember', (req: Request, res: Response) => {
+        console.log('A KAPOTT BODY A REQUESTBŐL: ',req.body)
+        if(req.body) {
+            const felhnev = req.body.felhasznalonev;
+            const klubnev = req.body.klubnev;
+
+            Club.findOne({'klubnev': klubnev}).exec().then(club => {
+                if(club?.members.includes(felhnev)) {
+                    res.status(400).send('A kért felhasználó már tagja a klubnak.');
+                } else {
+                    club?.members.push(felhnev);
+                    club?.save().then(eredmeny => {
+                        res.status(201).json({'message': 'A felhasználó felvevésre került.'});
+                    });
+                }
+            })
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+    router.post('/mc_deleteClubMember', (req: Request, res: Response) => {
+        console.log('A KAPOTT BODY A REQUESTBŐL: ',req.body)
+        if(req.body) {
+            const klubnev = req.body.klubnev;
+            const felhnev = req.body.felhasznalonev;
+
+            Club.findOne({'klubnev': klubnev}).exec().then(club => {
+                if(club?.members.includes(felhnev)) {
+                    club.members = club.members.filter(member => member !== felhnev);
+                    club.save().then(eredmeny => {
+                        res.status(201).json({'message:': 'A felhasználó törlésre került a klubból.'});
+                    });
+                } else {
+                    res.status(400).send('A törölni kívánt felhasználó nem tagja a klubnak.');
+                }
+            })
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+
+
     return router;
 }

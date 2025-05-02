@@ -78,6 +78,49 @@ export class DbService {
 
 
 
+  //Manageclubs rész
+
+  //Betöltéshez adat query-k
+  mc_getUsers() {
+    return this.http.get<string[]>('http://localhost:5000/app/mc_getUsers', {withCredentials: true});
+  }
+
+  mc_getClubNames() {
+    return this.http.get<string[]>('http://localhost:5000/app/mc_getClubNames', {withCredentials: true});
+  }
+
+  //Hozzáadás és törlés
+  mc_addClubMember(formData: any) {
+      const body = new URLSearchParams();
+
+      body.set('felhasznalonev', formData.felhasznalonev);
+      body.set('klubnev', formData.klubnev);
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      });
+
+      console.log("A BODY TARTALMA:", body);
+
+      return this.http.post<any>('http://localhost:5000/app/mc_addClubMember', body, {headers: headers});
+  }
+
+
+  mc_deleteClubMember(formData: any) {
+      const body = new URLSearchParams();
+
+      body.set('klubnev', formData.klubnev);
+      body.set('felhasznalonev', formData.felhasznalonev);
+      
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      });
+
+      console.log("A BODY TARTALMA:", body);
+
+      return this.http.post<any>('http://localhost:5000/app/mc_deleteClubMember', body, {headers: headers});
+  }
   
 
 
