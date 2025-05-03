@@ -123,7 +123,32 @@ export class DbService {
   }
   
 
+  //Userek része
+  user_Klubcsat_init(user: User) {
 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams();
+    body.set('username', user.username);
+
+    return this.http.post<JSON>('http://localhost:5000/app/getUserClubs', body, {headers: headers});
+  }
+
+  user_Klubcsat_csatlakozas(klub: Club, username: string) {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams();
+    body.set('klubnev', klub.klubnev);
+    body.set('username', username);
+    
+
+    return this.http.post<JSON>('http://localhost:5000/app/user_JoinClub', body, {headers: headers});
+  }
 
 
 }

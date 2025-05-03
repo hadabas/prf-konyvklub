@@ -1,1 +1,24 @@
-<p>klubcsatlakozas works!</p>
+<h1>Válassz klubot, ahova csatlakozni szeretnél!</h1>
+<div class="Clubs-container">
+    <div class="grid-item" *ngFor="let klub of megNemTagja">
+        <h3>{{ klub.klubnev }}</h3>
+        <p>{{ klub.description }}</p>
+        <p>Ajánlott könyvek: <br>
+            <span *ngFor="let konyv of klub.recommended_books">{{ konyv }} <br></span>
+        </p>
+        <p><b>Létrehozó: {{ klub.owner }}</b></p>
+        <button (click)="onCsatlakozasClick(klub)">Csatlakozás</button>
+      </div>
+</div>
+<h2>Jelenleg tagja vagy ezeknek a kluboknak:</h2>
+<div class="Clubs-container">
+    <div class="grid-item" *ngFor="let klub of marTagja">
+        <h3>{{ klub.klubnev }}</h3>
+        <p>{{ klub.description }}</p>
+        <p>Ajánlott könyvek: <br>
+            <span *ngFor="let konyv of klub.recommended_books">{{ konyv }} <br></span>
+        </p>
+        <p><b>Létrehozó: {{ klub.owner }}</b></p>
+        
+      </div>
+</div>

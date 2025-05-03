@@ -252,6 +252,48 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     });
 
 
+    //Normális felhasználóké
+    router.post('/getUserClubs', (req: Request, res: Response) => {
+        if(req.body) {
+            let marTagja: any = [];
+            let megNemTagja: any = [];
+
+            Club.find({}).exec().then(clubs => {
+                clubs.forEach(club => {
+                    if(club?.members.includes(req.body.username)) {
+                        marTagja.push(club);
+                    } else {
+                        megNemTagja.push(club);
+                    }
+                });
+
+                let json_response = {
+                    'marTagja': marTagja,
+                    'megNemTagja': megNemTagja
+                }
+
+                res.status(200).json(json_response)
+            });
+        } else {
+            res.status(401).send(null);
+        }
+        
+
+    });
+
+
+    router.post('/user_JoinClub', (req: Request, res: Response) => {
+        if(req.body) {
+            const klubnev = req.body.klubnev;
+            const username = req.body.username;
+            Club.findOneAndUpdate({'klubnev': klubnev},{ $push: { members: username }}, {new: true}).exec().then(frissitett_klub => {
+                res.status(200).json({'message':'Sikeresen csatlakoztál a klubhoz.'});
+            })
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
 
     return router;
 }
