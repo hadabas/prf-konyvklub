@@ -150,5 +150,48 @@ export class DbService {
     return this.http.post<JSON>('http://localhost:5000/app/user_JoinClub', body, {headers: headers});
   }
 
+  user_klubkilepes(klub: Club, username: string) {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams();
+    body.set('klubnev', klub.klubnev);
+    body.set('username', username);
+    
+
+    return this.http.post<JSON>('http://localhost:5000/app/user_LeaveClub', body, {headers: headers});
+  }
+
+
+  //Konyvertekeles
+  user_KonyvekInit(user: User) {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams();
+    body.set('username', user.username);
+
+    return this.http.post<JSON>('http://localhost:5000/app/getUserBookList', body, {headers: headers});
+  }
+
+  user_KonyvErtekeles(konyv: Book, ertekeles: number | string, username: string) {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams();
+    body.set('username', username);
+    body.set('ertekeles', String(ertekeles));
+    body.set('konyvcim', konyv.cim)
+
+    return this.http.post<JSON>('http://localhost:5000/app/rateBookByUser', body, {headers: headers});
+
+  }
+
 
 }

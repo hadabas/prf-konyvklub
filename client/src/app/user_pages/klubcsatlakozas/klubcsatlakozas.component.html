@@ -19,6 +19,6 @@
             <span *ngFor="let konyv of klub.recommended_books">{{ konyv }} <br></span>
         </p>
         <p><b>Létrehozó: {{ klub.owner }}</b></p>
-        
+        <button (click)="onKilepesClick(klub)">Kilépés</button>
       </div>
 </div>

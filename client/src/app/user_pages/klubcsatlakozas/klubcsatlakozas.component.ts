@@ -36,22 +36,33 @@ export class KlubcsatlakozasComponent implements OnInit {
     this.db.getUser().subscribe(user => { 
       this.db.user_Klubcsat_csatlakozas(klub,user.username).subscribe((res: any) => {
         this.dialog.open(RegSuccessDialogComponent, {
-                      width: '600px',
-                      maxWidth: '95vw',
-                      data: {
-                      title: 'Siker!',
-                      message: res.message
-                      }
-                    });
-        
-
+            width: '600px',
+            maxWidth: '95vw',
+            data: {
+            title: 'Siker!',
+            message: res.message
+            }
+          });
       this.loadKlubok();
-      
       });
      });
+  }
 
-    
+  onKilepesClick(klub: Club) {
 
+    this.db.getUser().subscribe(user => {
+      this.db.user_klubkilepes(klub,user.username).subscribe((res: any) => {
+        this.dialog.open(RegSuccessDialogComponent, {
+            width: '600px',
+            maxWidth: '95vw',
+            data: {
+            title: 'Siker!',
+            message: res.message
+            }
+          });
+      this.loadKlubok();
+      });
+    });
 
   }
 

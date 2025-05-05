@@ -1,1 +1,30 @@
-<p>konyvertekeles works!</p>
+<h1>Könyvek értékelése</h1>
+<h2 class="warning">Figyelem, a csalások elkerülése végett mindenki csak egyszer értékelhet egy könyvet, és később nem változtathat a döntésén. <br>
+    Jól gondolja meg mindenki, hogy mit, és mennyire értékel. </h2>
+
+<div class="Clubs-container">
+    <div class="grid-item" *ngFor="let konyv of megNemErtekelte">
+        <h3>{{ konyv.cim }}</h3>
+        <p>Kiadási év: {{ konyv.ev }}</p>
+        <p>Műfaja: {{ konyv.mufaj }}</p>
+        <p>Szerzője: {{ konyv.szerzo }}</p>
+        <p><b>Jelenlegi értékelése: {{ konyv.ertekeles }}</b></p>
+        <select #ertekelesSelect>
+            <option *ngFor="let ertekeles of ertekelesek" [value]="ertekeles">
+                {{ ertekeles }}
+            </option>
+        </select><br>
+        <button (click)="onErtekelesClick(konyv,ertekelesSelect.value)">Értékelés</button>
+    </div>
+</div>
+
+<h2>Már értékelt könyveid:</h2>
+<div class="Clubs-container">
+    <div class="grid-item" *ngFor="let konyv of marErtekelte">
+        <h3>{{ konyv.cim }}</h3>
+        <p>Kiadási év: {{ konyv.ev }}</p>
+        <p>Műfaja: {{ konyv.mufaj }}</p>
+        <p>Szerzője: {{ konyv.szerzo }}</p>
+        <p><b>Jelenlegi értékelése: {{ konyv.ertekeles | number:'1.1-2' }}</b></p>
+    </div>
+</div>

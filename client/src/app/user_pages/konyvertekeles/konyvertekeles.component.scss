@@ -1,0 +1,19 @@
+.Clubs-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* max 4 oszlop */
+    gap: 16px; /* távolság az elemek között */
+
+    width: 80vw;
+
+  }
+  
+  .grid-item {
+    background-color: #f0f0f0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .warning {
+    color: red;
+  }

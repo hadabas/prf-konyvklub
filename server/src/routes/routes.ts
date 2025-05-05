@@ -8,6 +8,11 @@ import { Rangsor } from '../model/Rangsor';
 
 export const configureRoutes = (passport: PassportStatic, router: Router): Router => {
 
+    // ***
+    // Az órán is vett middleware (passport) használatához szükséges lekérdezések, illetve
+    // db-vel való kommunikáció authentikálás szempontjából.
+    // ***
+
     router.get('/', (req: Request, res: Response) => {
         res.status(200).send('Hello, World!');
     });
@@ -178,7 +183,8 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     });
 
 
-    //Manageclubs innen kezdődik
+    // Manageclubs innen kezdődik
+    // Ez nem ugyan az, mint a getUser()
     router.get('/mc_getUsers', (req: Request, res: Response) => {
         if(req.isAuthenticated()) {
             //res.status(200).send(req.user);
@@ -250,6 +256,7 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
             res.status(401).send(null);
         }
     });
+    // ADMIN RÉSZ VÉGE
 
 
     //Normális felhasználóké
@@ -289,6 +296,78 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
             Club.findOneAndUpdate({'klubnev': klubnev},{ $push: { members: username }}, {new: true}).exec().then(frissitett_klub => {
                 res.status(200).json({'message':'Sikeresen csatlakoztál a klubhoz.'});
             })
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+    router.post('/user_LeaveClub', (req: Request, res: Response) => {
+        if(req.body) {
+            const klubnev = req.body.klubnev;
+            const username = req.body.username;
+            Club.findOneAndUpdate({'klubnev': klubnev},{ $pull: { members: username }}, {new: true}).exec().then(frissitett_klub => {
+                res.status(200).json({'message':'Sikeresen elhagytad a klubot.'});
+            })
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+    //Konyvertekeles
+    router.post('/getUserBookList', (req: Request, res: Response) => {
+        if(req.body) {
+            let marErtekelte: any = [];
+            let megNemErtekelte: any = [];
+
+            Book.find({}).exec().then(books => {
+                books.forEach(book => {
+                    if(book?.ertekelok.includes(req.body.username)) {
+                        marErtekelte.push(book);
+                    } else {
+                        megNemErtekelte.push(book);
+                    }
+                });
+
+                let json_response = {
+                    'marErtekelte': marErtekelte,
+                    'megNemErtekelte': megNemErtekelte
+                }
+
+                res.status(200).json(json_response)
+            });
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
+    router.post('/rateBookByUser', (req: Request, res: Response) => {
+        if(req.body) {
+            const bookName = req.body.konyvcim;
+            let rating = req.body.ertekeles;
+            try {rating = Number(rating);} catch (err) {
+                res.status(400).json({'message':"Value not autherized. "+err});
+            }
+            const username = req.body.username;
+
+            Book.findOneAndUpdate( {'cim': bookName}, {$push: { ertekelok: username, ertekeles_data: rating }}, { new: true }).exec().then(frissitettKonyv => {
+        
+                let updated_ertekeles = 0;
+
+                if(frissitettKonyv) {
+                    if(frissitettKonyv.ertekeles_data.length <= 0) {
+                        updated_ertekeles = 0;
+                    } else {
+                        updated_ertekeles = frissitettKonyv.ertekeles_data.reduce((osszeg, aktualis) => osszeg + aktualis, 0) / frissitettKonyv.ertekeles_data.length;
+                    }
+
+                    Book.updateOne({'cim': bookName}, {$set: {'ertekeles': updated_ertekeles}}).exec().then(keszKonyv => {
+                        res.status(200).json({'message':'Sikeres értékelés.'});
+                    });
+
+                } else {
+                    res.status(400).json({'message':'DB Hiba'});
+                }
+            });
         } else {
             res.status(401).send(null);
         }
