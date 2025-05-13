@@ -1,12 +1,56 @@
-.item {
-    background-color: #f0f0f0;
-    padding: 12px;
-    border: 1px solid #ccc;
-    text-align: center;
-    margin-top: 20px;
-    width: 20vw;
+// Alapszínek és változók
+$primary-color: #2c3e50;
+$highlight-color: #3498db;
+$background-color: #f9f9f9;
+$card-bg: #ffffff;
+$shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$text-color: #333;
+
+// Oldal címei
+h1, h2 {
+  text-align: center;
+  color: $primary-color;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.warning {
-    color: red;
+// Tartalom konténer (opcionális, ha több item van)
+.rangsor-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 1rem 2rem;
+  //background-color: $background-color;
+}
+
+// Egy rangsor "kártya"
+.item {
+  background-color: $card-bg;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: $shadow;
+  text-align: left;
+  transition: transform 0.3s ease;
+  color: $text-color;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    color: $highlight-color;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+
+    &:first-of-type {
+      font-weight: bold;
+      color: adjust($highlight-color, -10%);
+    }
+  }
 }

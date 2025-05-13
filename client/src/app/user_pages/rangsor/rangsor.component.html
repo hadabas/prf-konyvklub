@@ -1,11 +1,12 @@
 <h1>Rangsor</h1>
-
 <h2>2025</h2>
 
-<div class="item" *ngFor="let rangsor_entry of Rangsor_tomb">
-        <h3>{{ Honapok[rangsor_entry.honap-1] }}</h3>
-            <p>A hónap könyve: {{ rangsor_entry.honap_konyve }}</p>
-            <p>Első helyezett: {{ rangsor_entry.elsohelyezett }}</p>
-            <p>Második helyezett: {{ rangsor_entry.masodikhelyezett }}</p>
-            <p>Harmadik helyezett: {{ rangsor_entry.harmadikhelyezett }}</p>
+<div class="rangsor-container">
+  <div class="item" *ngFor="let rangsor_entry of Rangsor_tomb">
+    <h3>{{ Honapok[rangsor_entry.honap-1] }}</h3>
+    <p>A hónap könyve: {{ rangsor_entry.honap_konyve }}</p>
+    <p>Első helyezett: {{ rangsor_entry.elsohelyezett }}</p>
+    <p>Második helyezett: {{ rangsor_entry.masodikhelyezett }}</p>
+    <p>Harmadik helyezett: {{ rangsor_entry.harmadikhelyezett }}</p>
+  </div>
 </div>
