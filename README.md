@@ -17,7 +17,7 @@ Ez elkezd építeni egy image-t a letöltött dockerfile alapján, ezt várjuk v
    ```
    docker run -p 4200:4200 -p 5000:5000 konyvklub_image
    ```
-Ki kell kötnünk a 4200-as és az 5000-es portot is a működéshez. A háttérben úgy működik, hogy párhuzamos szálakon futtatja a szervert és a klienst is, és a végén az interaktív terminálba mind a kettő standard outputja ki lesz kötve (de a háttérben fut a szerver, és a kliens is.)
+Ki kell kötnünk a 4200-as és az 5000-es portot is a működéshez. A háttérben úgy működik, hogy párhuzamos szálakon futtatja a szervert és a klienst is, és a végén a terminálba mind a kettő standard outputja ki lesz kötve (de a háttérben fut a szerver, és a kliens is.)
 
 
 4. Ha ez a parancs is lefutott (vigyázzunk, mert lehet hogy 1-2 percet várni kell a futtatás során hogy tényleg minden lefusson, a package installációk eltarthatnak egy ideig), akkor hozzáférhetünk a klienshez a
@@ -25,7 +25,7 @@ Ki kell kötnünk a 4200-as és az 5000-es portot is a működéshez. A háttér
 címen a böngészőnkben.
 
 ## Sima futtatás:
-Ennél a módszernél kézzel kell elindítanunk két külön terminálban a szervert és a klienst is. Figyeljünk rá, hogy ha ezt a módszert használjuk, rendelkeznie kell a futtatónak saját maga által telepített v22-es verziójú (vagy azzal kompatibilis) node-al, illetve globálisan telepített angular-cli package-el. (Az npm install és az ng serve parancsok miatt.)
+Ennél a módszernél kézzel kell elindítanunk két külön terminálban a szervert és a klienst is. Figyeljünk rá, hogyha ezt a módszert használjuk, rendelkeznie kell a futtatónak saját maga által telepített v22-es verziójú (vagy azzal kompatibilis) node-al, illetve globálisan telepített angular-cli package-el. (Az npm install és az ng serve parancsok miatt.)
 
 1. Klónozzuk az állományt a következő paranccsal:
    ```
