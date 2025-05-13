@@ -48,3 +48,10 @@ Ennél a módszernél kézzel kell elindítanunk két külön terminálban a sze
 4. Ha minden jól ment, akkor két külön terminálban fut a kliens és a szerver. Ez után, nyissunk egy böngészőt, és a
    **http://localhost:4200**
 címen elérhetjük a kliens programot. Itt fontos megjegyezni, hogy a terminálokat **ne zárjuk be használat közben, azoknak folyamatosan futnia kell.**
+
+## Telepítés és futtatás után:
+Két különböző felhasználói jogkör létezik az oldalon, admin és sima felhasználó. Jelenleg minta adatokkal van feltöltve az adatbázis, de megadok egy-egy felhasználót mind a két jogkörnél a porgram kipróbálásához:
+1. Admin jogú felhasználó: Felhasználónév: admin, Jelszó: adminpw12
+2. Alapjogú felhasználó  : Felhasználónév: user1, Jelszó: userpw12
+
+De mint látható a kezdőlapon, alapjogú felhasználót lehet regisztrálni sajátot, ha sajátot szeretnénk.
