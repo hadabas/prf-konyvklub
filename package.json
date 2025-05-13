@@ -1,0 +1,11 @@
+{
+  "name": "digitalis-konyvklub",
+  "scripts": {
+    "client": "cd client && npm install && ng serve --host 0.0.0.0 --port 4200",
+    "server": "cd server && npm install && npm run start",
+    "start": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
