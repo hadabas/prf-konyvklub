@@ -1,5 +1,5 @@
 # Virtuális Könyvklub Platform
-Az SZTE programrendszerek fejlesztése nevű kurzusára készített program.
+Az SZTE programrendszerek fejlesztése nevű kurzusára készített program. Az adatbázis megvalósítása és használata a háttérben, felhőn keresztül történik, az órán tárgyalt MongoDB Atlas szolgáltatás használatával, emiatt az adatbázis-szolgáltatás telepítésével a felhasználónak nem kell foglalkoznia. A kliens és szerver telepítéséhez pedig a lentebb tárgyalt lépések szükségesek.
 ## Használat:
 Először el kell dönteni, hogy hagyományos vagy dockeres módban szeretnénk futtatni a programot. A dockeres az egyszerűbb, az az ajánlott.
 ## Dockeres futtatás:
@@ -23,3 +23,24 @@ Ki kell kötnünk a 4200-as és az 5000-es portot is a működéshez. A háttér
 4. Ha ez a parancs is lefutott (vigyázzunk, mert lehet hogy 1-2 percet várni kell a futtatás során hogy tényleg minden lefusson, a package installációk eltarthatnak egy ideig), akkor hozzáférhetünk a klienshez a
    **http://localhost:4200**
 címen a böngészőnkben.
+
+## Sima futtatás:
+Ennél a módszernél kézzel kell elindítanunk két külön terminálban a szervert és a klienst is. Figyeljünk rá, hogy ha ezt a módszert használjuk, rendelkeznie kell a futtatónak saját maga által telepített v22-es verziójú (vagy azzal kompatibilis) node-al, illetve globálisan telepített angular-cli package-el. (Az npm install és az ng serve parancsok miatt.)
+
+1. Klónozzuk az állományt a következő paranccsal:
+   ```
+   git clone 'https://github.com/hadabas/prf-konyvklub.git'
+   ```
+2. Nyissunk meg két terminált, és az egyikkel navigáljunk a server mappába. Ez után, adjuk ki ezt a két parancsot egymás után sorrendben:
+   ```
+   npm install
+   npm run start
+   ```
+3. A másik terminállal navigáljunk a client mappába. Ez után, adjuk ki ezt a két parancsot egymás utáni sorrendben:
+   ```
+   npm install
+   ng serve
+   ```
+4. Ha minden jól ment, akkor két külön terminálban fut a kliens és a szerver. Ez után, nyissunk egy böngészőt, és a
+   **http://localhost:4200**
+címen elérhetjük a kliens programot. Itt fontos megjegyezni, hogy a terminálokat **ne zárjuk be használat közben, azoknak folyamatosan futnia kell.**
