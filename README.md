@@ -1,5 +1,9 @@
 # Virtuális Könyvklub Platform
-Az SZTE programrendszerek fejlesztése nevű kurzusára készített program. Az adatbázis megvalósítása és használata a háttérben, felhőn keresztül történik, az órán tárgyalt MongoDB Atlas szolgáltatás használatával, emiatt az adatbázis-szolgáltatás telepítésével a felhasználónak nem kell foglalkoznia. A kliens és szerver telepítéséhez pedig a lentebb tárgyalt lépések szükségesek.
+Az SZTE programrendszerek fejlesztése nevű kurzusára készített program. Az adatbázis megvalósítása és használata a háttérben, felhőn keresztül történik, az órán tárgyalt MongoDB Atlas szolgáltatás használatával, emiatt az adatbázis-szolgáltatás telepítésével a felhasználónak nem kell foglalkoznia.
+
+Fontos megjegyezni még, hogy a program helyes működéséhez **folyamatos internetelérés szükséges** (a program telepítésénél is, de mivel felhőn keresztül kommunikál az adatbázissal, ezért az alapvető működéshez is.)
+
+A kliens és szerver telepítéséhez pedig a lentebb tárgyalt lépések szükségesek.
 ## Használat:
 Először el kell dönteni, hogy hagyományos vagy dockeres módban szeretnénk futtatni a programot. A dockeres az egyszerűbb, az az ajánlott.
 ## Dockeres futtatás:
