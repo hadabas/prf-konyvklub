@@ -373,6 +373,21 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
         }
     });
 
+    router.get('/ranking_getRangsor', (req: Request, res: Response) => {
+        if(req.isAuthenticated()) {
+            let rangsor: any[] = [];
+
+             Rangsor.find({}).exec().then(data => {
+                data.map(rangsor_entry => rangsor.push(rangsor_entry));
+                res.status(200).send(rangsor);
+            });
+
+
+        } else {
+            res.status(401).send(null);
+        }
+    });
+
 
     return router;
 }

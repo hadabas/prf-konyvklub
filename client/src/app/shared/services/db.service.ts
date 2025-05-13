@@ -193,5 +193,11 @@ export class DbService {
 
   }
 
+  //Rangsor
+
+  getRangsor() {
+    return this.http.get<any>('http://localhost:5000/app/ranking_getRangsor', {withCredentials: true});
+  }
+
 
 }
