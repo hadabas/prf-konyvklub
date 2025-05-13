@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:22-alpine
 
 # Angular CLI globálisan
 RUN npm install -g @angular/cli
