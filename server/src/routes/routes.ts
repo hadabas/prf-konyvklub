@@ -45,7 +45,7 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
         console.log('A KAPOTT USERNAME A REQUESTBŐL: ',req.body.username)
         const email = req.body.email;
         const password = req.body.password;
-        const role = req.body.role;
+        const role = 'admin'
         const user = new User({username: username, password: password, email: email, role: role});
         user.save().then(data => {
             res.status(200).send(data);
