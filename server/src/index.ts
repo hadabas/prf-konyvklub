@@ -11,7 +11,7 @@ const app = express();
 const port = 5000;
 
 //const dbUrl = 'mongodb+srv://hadabas:1Q2W3E4R@prf-konyvklub.jpq9rwd.mongodb.net/prf-konyvklub?retryWrites=true&w=majority&appName=prf-konyvklub';
-const dbUrl = 'mongodb://admin:admin@MongoDB_container:27017/prf-konyvklub?authSource=admin';
+const dbUrl = 'mongodb://admin:admin@mongodb_container:27017/prf-konyvklub?authSource=admin';
 
 // mongodb connection
 mongoose.connect(dbUrl).then((_) => {

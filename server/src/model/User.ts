@@ -11,11 +11,12 @@ interface IUser extends Document {
     comparePassword: (candidatePassword: string, callback: (error: Error | null, isMatch: boolean) => void) => void;
 }
 
+// role: szerepkör, lehetséges értékek: felhasznalo/admin .
 const UserSchema: Schema<IUser> = new mongoose.Schema({
     username: { type: String, required: true }, 
     password: { type: String, required: true },
     email: { type: String, required: false },
-    role: { type: String, default: 'felhasznalo' }
+    role: { type: String, default: 'admin' }
 });
 
 // hook
