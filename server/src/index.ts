@@ -22,7 +22,7 @@ mongoose.connect(dbUrl).then((_) => {
 });
 
 // A CORS (cross origin manager) beállítása middlewareként.
-const whitelist = ['http://localhost:4200','http://localhost'];
+const whitelist = ['http://localhost:4200','http://localhost','http://konyvtarklub.test'];
 const corsOptions = {
     origin: (origin: string | undefined, callback: (err: Error | null, allowed?: boolean) => void ) => {
         if(whitelist.indexOf(origin!) != -1) {
