@@ -22,13 +22,16 @@ mongoose.connect(dbUrl).then((_) => {
 });
 
 // A CORS (cross origin manager) beállítása middlewareként.
-const whitelist = ['http://localhost:4200','http://localhost','http://konyvtarklub.test'];
+const whitelist = ['http://localhost:4200', 'http://localhost', 'http://konyvtarklub.test'];
+
 const corsOptions = {
-    origin: (origin: string | undefined, callback: (err: Error | null, allowed?: boolean) => void ) => {
-        if(whitelist.indexOf(origin!) != -1) {
-            callback(null,true);
+    origin: (origin: string | undefined, callback: (err: Error | null, allowed?: boolean) => void) => {
+        // Ha nincs origin (pl. curl/Postman), engedjük
+        if (!origin || whitelist.includes(origin)) {
+            callback(null, true);
         } else {
-            callback(new Error('A CORS által a kérés megtagadva. (Nincs rajta az origin a fehérlistán.)'))
+            console.log('Blocked by CORS:', origin);
+            callback(new Error('A CORS által a kérés megtagadva. Nincs rajta az origin a fehérlistán.'));
         }
     },
     credentials: true
